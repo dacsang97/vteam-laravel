@@ -6,12 +6,9 @@
                 You think about the ideas, let us do the rest and make it real.
             </p>
             <div data-animation='fadeInDown' data-animation-delay='600' data-out-animation='fadeOutUp' data-out-animation-delay='800'>
-                <form class="notify">
-                    <div class="btn">
-                        <label for="exampleInputEmail1">Contact us</label>
-                        <input class="form-control" id="exampleInputEmail1" name="subscribe" value="https://www.facebook.com/vteamglobal" readonly>
-                    </div>
-                </form>
+                <a class="btn" href="https://blog.vteam.info" target="_blank">
+                    Our Blog
+                </a>
             </div>
         </div>
     </div>
