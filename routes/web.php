@@ -15,6 +15,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//Auth::routes();
+Auth::routes();
 
 Route::get('/home', ['as' => 'admin.dashboard', 'uses' => 'HomeController@index']);
+
+// Hidden link app
+Route::group(['namespace' => 'HiddenLink', 'prefix' => 'link'], function(){
+    Route::get('/', ['as' => 'link.index', 'uses' => 'SocialAuthController@index']);
+    Route::get('/callback', ['as' => 'link.callback', 'uses' => 'SocialAuthController@callback']);
+    Route::get('/redirect', ['as' => 'link.redirect', 'uses' => 'SocialAuthController@redirect']);
+});
