@@ -15,7 +15,10 @@ class LinkController extends Controller
     }
 
     public function notAccess() {
-        return view('hidden.NotAccess');
+        return view('hidden.NotAccess', [
+            'message' => 'Website hiện đang phát triển nên tính năng này chỉ truy cập được bởi Admin.
+        Xin lỗi vì bất tiện này. ^^',
+        ]);
     }
 
     public function store(Request $request){
@@ -63,6 +66,11 @@ class LinkController extends Controller
 
     public function view($hash_id, Request $request){
         $link = Link::where('hash_id', $hash_id)->first();
+        if (empty($link)) {
+            return view('hidden.NotAccess', [
+                'message' => 'Link không tồn tại :\'(',
+            ]);
+        }
         $fb = new FBRequest();
         $strs = explode('/', $link->post_link);
         $postId = $strs[count($strs) - 1];

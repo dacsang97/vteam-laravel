@@ -37,3 +37,7 @@ Route::group(['namespace' => 'HiddenLink', 'prefix' => 'link'], function(){
         Route::get('/view/{hash_id}', ['as' => 'link.view', 'uses' => 'LinkController@view']);
     });
 });
+
+Route::any('{any?}', function($any = null){
+    return redirect()->to('/');
+})->where('any', '.*');
