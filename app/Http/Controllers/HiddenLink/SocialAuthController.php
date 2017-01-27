@@ -6,20 +6,30 @@ use App\HiddenLink\SocialAccountService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Socialite;
+use Session;
 
 
 class SocialAuthController extends Controller
 {
     public function index() {
+        Session::put('redirect_to', $_SERVER["REQUEST_URI"]);
+        if (auth()->user()) {
+            return view('hidden.index', [
+
+            ]);
+        }
         return view('hidden.index');
     }
-    public function redirect() {
+    public function redirect(Request $request) {
+
         return Socialite::driver('facebook')->redirect();
     }
 
     public function callback(SocialAccountService $service) {
-        $user = $service->createOrGetUser(Socialite::driver('facebook')->user());
+        $providerUser = Socialite::driver('facebook')->user();
+        $user = $service->createOrGetUser($providerUser);
         auth()->login($user);
-        return redirect()->route('link.index');
+        Session::put('fb_user_access_token', (string) $providerUser->token);
+        return redirect()->to('http://vteam.dev'.Session::get('redirect_to'));
     }
 }

@@ -24,4 +24,16 @@ Route::group(['namespace' => 'HiddenLink', 'prefix' => 'link'], function(){
     Route::get('/', ['as' => 'link.index', 'uses' => 'SocialAuthController@index']);
     Route::get('/callback', ['as' => 'link.callback', 'uses' => 'SocialAuthController@callback']);
     Route::get('/redirect', ['as' => 'link.redirect', 'uses' => 'SocialAuthController@redirect']);
+
+    Route::group(['middleware' => 'auth.locked'], function() {
+        Route::get('/not-access', ['as' => 'link.not-access', 'uses' => 'LinkController@notAccess']);
+
+        Route::group(['middleware' => 'admin'], function() {
+            Route::get('/create', ['as' => 'link.create', 'uses' => 'LinkController@create']);
+            Route::post('/create', ['as' => 'link.store', 'uses' => 'LinkController@store']);
+            Route::get('/edit', ['as' => 'link.edit', 'uses' => 'LinkController@edit']);
+        });
+        Route::get('/view', 'SocialAuthController@index');
+        Route::get('/view/{hash_id}', ['as' => 'link.view', 'uses' => 'LinkController@view']);
+    });
 });

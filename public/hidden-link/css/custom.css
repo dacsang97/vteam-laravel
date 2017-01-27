@@ -1457,6 +1457,28 @@ input[type="button"]:focus {
   line-height: 20px;
   float: left;
   margin-left: 10px;
-  margin-top: 10px;
-  width: 200px
+  width: 200px;
+}
+
+.logo-container .brand h6 {
+  margin-top: 5px;
+}
+
+.wizard-card .text {
+  text-align: center;
+  margin: 10px 0;
+}
+
+.wizard-card .choice a {
+  text-decoration: none;
+}
+
+.table {
+  table-layout:fixed;
+}
+
+.table td {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
