@@ -20,13 +20,14 @@
 <body>
 <div class="image-container set-full-height" style="background-image: url('http://i.imgur.com/mPEpBc0.png')">
     @if (Auth::user())
-        <?php $fbid = Auth::user()->providerUser()->first()->provider_user_id; ?>
+        <?php $user = App\User::find(Auth::user()->getAuthIdentifier()); ?>
+        <?php $fbid = $user->providerUser()->first()->provider_user_id; ?>
         <div class="logo-container">
             <div class="logo">
                 <img src="{{ 'http://graph.facebook.com/'.$fbid.'/picture?type=large' }}" width="60">
             </div>
             <div class="brand">
-                <h6>{{ Auth::user()->name }}</h6>
+                <h6>{{ $user->name }}</h6>
                 {{-- logout--}}
                 <a href="{{ url('/logout') }}" class="btn btn-danger btn-fill btn-xs"
                    onclick="event.preventDefault();
