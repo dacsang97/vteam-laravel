@@ -30,6 +30,6 @@ class SocialAuthController extends Controller
         $user = $service->createOrGetUser($providerUser);
         auth()->login($user);
         Session::put('fb_user_access_token', (string) $providerUser->token);
-        return redirect()->to('http://vteam.dev'.Session::get('redirect_to'));
+        return redirect()->route('link.index');
     }
 }
