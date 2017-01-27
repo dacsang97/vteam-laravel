@@ -24,8 +24,7 @@ class LinkController extends Controller
     public function store(Request $request){
         $l_data = $request->only('hide_link', 'post_link', 'comments_lock', 'reactions_lock');
         $l_data['user_id'] = auth()->user()->id;
-        $hashids = new Hashids('VProTecTedLiNk', 8);
-        $l_data['hash_id'] = $hashids->encode(Link::all()->count());
+        $l_data['hash_id'] = sha1(Link::all()->count());
 //        dd($l_data);
         try {
             $link = Link::create($l_data);
