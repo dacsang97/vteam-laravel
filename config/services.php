@@ -37,6 +37,6 @@ return [
     'facebook' => [
         'client_id' => '1679843972308490',
         'client_secret' => '3c066b68d7c95dfbb62b0914b41fe6e6',
-        'redirect' => 'http://vteam.dev/link/callback',
+        'redirect' => env('FB_CALLBACK'),
     ],
 ];
